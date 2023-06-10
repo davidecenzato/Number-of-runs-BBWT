@@ -13,5 +13,10 @@ mkdir installed
 ./install.sh installed/
 
 cd ../../
-make
+cp ../main.cpp ./
+cp ../Makefile ./
+make 
+
+cd ..
+mkdir outdir
 ```
