@@ -3,7 +3,7 @@
 This is the code for the paper **On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler
 Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Romana.
 
-(TODO) brief intro
+(TODO) brief intro, ex $r_B$
 
 This code investigates:
 - BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^{rev})}, \frac{r_B(s^{rev})}{r_B(s)})$
