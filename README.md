@@ -6,9 +6,9 @@ Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Roman
 (TODO) brief intro
 
 This code investigates:
-- $\rho$: (TODO) runs ratio, formula here
-* $\delta$: (TODO) difference in the number of runs of the BBWT formula here
-+ $\matchcal{L}$ /# Lyndon factors (TODO fix) $\matchcal{l}(s)-\matchcal{l}(s^{rev})$
+- $\rho_B$: (TODO) runs ratio, formula here
+* $\delta_B$: (TODO) difference in the number of runs of the BBWT formula here
++ $\mathcal{L}$ /# Lyndon factors (TODO fix) $\mathcal{l}(s)-\mathcal{l}(s^{rev})$
 
 ### Install repo
 
@@ -48,20 +48,20 @@ options:
 ```
 
 The outputs will be found in a new directory. It consists of:
-- Statistics on the runs ratio for each string length up to mak_k (max $\rho$, avg $\rho$, std $\rho$, % strings with $\rho$=1)
-* Strings with max $\rho$ for each length
-+ Strings with max $\rho$ over all the string up to length max_k
-- Statistics on $\delta$ for each string length up to mak_k (max $\delta$, min $\delta$, avg $\delta$, std $\delta$, % strings with $\delta$=0)
-* Strings with max $\delta$ for each length
-+ Strings with max $\delta$ over all the string up to length max_k
-- Strings with min $\delta$ for each length
-* Strings with min $\delta$ over all the string up to length max_k
+- Statistics on the runs ratio for each string length up to mak_k (max $\rho_B$, avg $\rho_B$, std $\rho_B$, % strings with $\rho_B$=1)
+* Strings with max $\rho_B$ for each length
++ Strings with max $\rho_B$ over all the string up to length max_k
+- Statistics on $\delta_B$ for each string length up to mak_k (max $\delta_B$, min $\delta_B$, avg $\delta_B$, std $\delta_B$, % strings with $\delta_B$=0)
+* Strings with max $\delta_B$ for each length
++ Strings with max $\delta_B$ over all the string up to length max_k
+- Strings with min $\delta_B$ for each length
+* Strings with min $\delta_B$ over all the string up to length max_k
 
-- Statistics on $\matchcal{L}$ for each string length up to mak_k (max $\matchcal{L}$, min $\matchcal{L}$, avg $\matchcal{L}$, std $\matchcal{L}$)
-* Strings with max $\matchcal{L}$ for each length
-+ Strings with max $\matchcal{L}$ over all the string up to length max_k
-- Strings with min $\matchcal{L}$ for each length
-* Strings with min $\matchcal{L}$ over all the string up to length max_k
+- Statistics on $\mathcal{L}$ for each string length up to mak_k (max $\mathcal{L}$, min $\mathcal{L}$, avg $\mathcal{L}$, std $\mathcal{L}$)
+* Strings with max $\mathcal{L}$ for each length
++ Strings with max $\mathcal{L}$ over all the string up to length max_k
+- Strings with min $\mathcal{L}$ for each length
+* Strings with min $\mathcal{L}$ over all the string up to length max_k
 * (TODO add distinc Lyndon factors)
 + (TODO make thic coherent with real results)
 
