@@ -1,4 +1,5 @@
 import argparse, string, csv, heapq, subprocess
+import numpy as np
 from itertools import product
 from pathlib import Path
 from collections import Counter
@@ -66,19 +67,24 @@ def check_rev(seq):
         return True
     return False
 
-def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, outfile4_2, outfile4_2_1, outfile4_2_2, outfile5, outfile6, outfile6_2, outfile6_2_1, outfile6_2_2, outfile7, max_rho, max_diff, min_diff, max_lyn, min_lyn, tempdir):
+def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, outfile4_2, outfile4_2_1, outfile4_2_2, outfile6, outfile6_2, outfile6_2_1, outfile6_2_2, outfile7, outfile7_2, outfile7_2_1, outfile7_2_2, outfile8, outfile8_d, max_rho, max_diff, min_diff, max_lyn, min_lyn, max_dlyn, min_dlyn, tempdir):
     rho_list = []
     no_rho_1 = 0
     max_rho_l = 1
 
     diff_list = []
-    max_diff_l = 0
-    min_diff_l = 0
+    max_diff_l = -np.inf
+    min_diff_l = np.inf
 
     lyn_list = []
-    max_lyn_l = 0
-    min_lyn_l = 0
+    max_lyn_l = -np.inf
+    min_lyn_l = np.inf
     no_lyn_0 = 0
+    
+    dlyn_list = []
+    max_dlyn_l = -np.inf
+    min_dlyn_l = np.inf
+    no_dlyn_0 = 0
 
     # create strings |k| with alphabet |sigma|
     it = product(string.ascii_uppercase[:sigma], repeat=k)
@@ -96,7 +102,8 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
             subprocess.check_call(bbwt_f.split())
             # compute forward Lyndon factorization length
             lyn_f = Duval(seq)
-            cf_f = len(set(lyn_f))
+            cdf_f = len(set(lyn_f))
+            cf_f = len(lyn_f)
             # compute BBWT forward number of runs
             rf = noRuns(f_file+".bbwt")
             # compute reverse sequence
@@ -109,16 +116,21 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
             subprocess.check_call(bbwt_r.split())
             # compute reverse Lyndon factorization length
             lyn_r = Duval(rev)
-            cf_r = len(set(lyn_r))
+            cdf_r = len(set(lyn_r))
+            cf_r = len(lyn_r)
             # compute BBWT reverse number of runs
             rr = noRuns(r_file+".bbwt")
 
-            # compute diff
-            diff = rf-rr
-
-            ## RUNS RATIO
             # compute rho
             r = round(max((rf / rr), (rr / rf)), 2)
+            # compute diff
+            diff = rf-rr
+            # compute diff lyndon factors
+            lyn = cf_f - cf_r
+            # compute diff distinct lyndon factors
+            d_lyn = cdf_f - cdf_r
+
+            ## RUNS RATIO
             # chekf if rho == 1
             if r==1: no_rho_1 += 1
             # append rho to rho list
@@ -225,41 +237,72 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
                     write_csv_w_a(outfile4_2_2, [str(k),seq, str(diff), str(r), str(rf), str(rr), str(std)], 'a')
 
             ## LYNDON FACTORS
-            # compute diff lyndon factors
-            lyn = cf_f - cf_r
+            
             if lyn == 0 : no_lyn_0 += 1
             lyn_list.append(lyn)
             # check max_lyn
             if max_lyn_l < lyn:
                 max_lyn_l = lyn
                 write_csv_w_a(outfile6, ["n","s", "lyn", "diff", "rho", "lyn_f", "lyn_r"], 'w')
-                write_csv_w_a(outfile6, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                write_csv_w_a(outfile6, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
                 if max_lyn < lyn:
                     max_lyn = lyn
                     write_csv_w_a(outfile6_2_1, ["n","s", "lyn", "diff", "rho", "lyn_f", "lyn_r"], 'w')
-                    write_csv_w_a(outfile6_2_1, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                    write_csv_w_a(outfile6_2_1, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
            
             elif max_lyn_l == lyn:
-                write_csv_w_a(outfile6, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                write_csv_w_a(outfile6, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
                 if max_lyn == lyn:
-                    write_csv_w_a(outfile6_2_1, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                    write_csv_w_a(outfile6_2_1, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
             
             # check min_lyn
             if min_lyn_l > lyn:
                 min_lyn_l = lyn
                 write_csv_w_a(outfile6_2, ["n","s", "lyn", "diff", "rho", "lyn_f", "lyn_r"], 'w')
-                write_csv_w_a(outfile6_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                write_csv_w_a(outfile6_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
                 if min_lyn > lyn:
                     min_lyn = lyn
                     write_csv_w_a(outfile6_2_2, ["n","s", "lyn", "diff", "rho", "lyn_f", "lyn_r"], 'w')
-                    write_csv_w_a(outfile6_2_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                    write_csv_w_a(outfile6_2_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
 
             elif min_lyn_l == lyn:
-                write_csv_w_a(outfile6_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                write_csv_w_a(outfile6_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
                 if min_lyn == lyn:
-                    write_csv_w_a(outfile6_2_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r), str(cf_r)], 'a')
+                    write_csv_w_a(outfile6_2_2, [str(k),seq, str(lyn), str(diff), str(r), str(cf_f), str(cf_r)], 'a')
 
+            ## DISTINCT LYNDON FACTORS
+            if d_lyn == 0 : no_dlyn_0 += 1
+            dlyn_list.append(d_lyn)
+            # check max_lyn
+            if max_dlyn_l < d_lyn:
+                max_dlyn_l = d_lyn
+                write_csv_w_a(outfile7, ["n","s", "dlyn", "diff", "rho", "dlyn_f", "dlyn_r"], 'w')
+                write_csv_w_a(outfile7, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+                if max_dlyn < d_lyn:
+                    max_dlyn = d_lyn
+                    write_csv_w_a(outfile7_2_1, ["n","s", "dlyn", "diff", "rho", "dlyn_f", "dlyn_r"], 'w')
+                    write_csv_w_a(outfile7_2_1, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+           
+            elif max_dlyn_l == d_lyn:
+                write_csv_w_a(outfile7, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+                if max_dlyn == d_lyn:
+                    write_csv_w_a(outfile7_2_1, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
             
+            # check min_lyn
+            if min_dlyn_l > d_lyn:
+                min_dlyn_l = d_lyn
+                write_csv_w_a(outfile7_2, ["n","s", "dlyn", "diff", "rho", "dlyn_f", "dlyn_r"], 'w')
+                write_csv_w_a(outfile7_2, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+                if min_dlyn > d_lyn:
+                    min_dlyn = d_lyn
+                    write_csv_w_a(outfile7_2_2, ["n","s", "dlyn", "diff", "rho", "dlyn_f", "dlyn_r"], 'w')
+                    write_csv_w_a(outfile7_2_2, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+
+            elif min_dlyn_l == d_lyn:
+                write_csv_w_a(outfile7_2, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+                if min_dlyn == d_lyn:
+                    write_csv_w_a(outfile7_2_2, [str(k),seq, str(d_lyn), str(diff), str(r), str(cdf_f), str(cdf_r)], 'a')
+
 
     # compute stats rho
     mean_rho_l = round(sum(rho_list)/len(rho_list),3)
@@ -275,13 +318,21 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
     mean_lyn_l = round(sum(lyn_list)/len(lyn_list),3)
     std_lyn_l = round(stdev(lyn_list),3)
     p_lyn_0_l = round((no_lyn_0 / len(rho_list) * 100), 2)
+    
+    # compute stats distinct lyndon factors
+    mean_dlyn_l = round(sum(dlyn_list)/len(dlyn_list),3)
+    std_dlyn_l = round(stdev(dlyn_list),3)
+    p_dlyn_0_l = round((no_dlyn_0 / len(rho_list) * 100), 2)
+
 
 
     # write stats for all sequences of length k
     write_csv_w_a(outfile, [str(k),str(max_rho_l),str(min_rho_l),str(mean_rho_l),str(std_rho_l),str(p_rho_1_l), str(len(rho_list))],'a')
     write_csv_w_a(outfile3, [str(k),str(max_diff_l),str(min_diff_l),str(mean_diff_l),str(std_diff_l),str(p_rho_1_l)],'a')
-    write_csv_w_a(outfile7, [str(k),str(max_lyn_l),str(min_lyn_l),str(mean_lyn_l),str(std_lyn_l),str(p_lyn_0_l)],'a')
-    return max_rho, max_diff, min_diff, max_lyn, min_lyn
+    write_csv_w_a(outfile8, [str(k),str(max_lyn_l),str(min_lyn_l),str(mean_lyn_l),str(std_lyn_l),str(p_lyn_0_l)],'a')
+    write_csv_w_a(outfile8_d, [str(k),str(max_dlyn_l),str(min_dlyn_l),str(mean_dlyn_l),str(std_dlyn_l),str(p_dlyn_0_l)],'a')
+
+    return max_rho, max_diff, min_diff, max_lyn, min_lyn, max_dlyn, min_dlyn
 
 def allk_bbwt_bbwtrev(sigma, k, outdir,tempdir):
     b_rho, b_diff, c_f = {}, {}, {}
@@ -304,24 +355,31 @@ def allk_bbwt_bbwtrev(sigma, k, outdir,tempdir):
     filename4_2_2 = str(outdir) + "/min_diff" + "_" + str(sigma) + ".csv" 
     write_csv_w_a(filename4_2_2, ["n","s","diff_runs", "rho", "r_f", "r_r", "standard"], 'w')
 
-    
-    filename5 = str(outdir) + "/complete_lyn" + "_" + str(sigma) + ".csv" 
-    write_csv_w_a(filename5, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r"], 'w')
-
     filename6_2_1 = str(outdir) + "/max_lyn" + "_" + str(sigma) + ".csv" 
-    write_csv_w_a(filename6_2_1, ["n","s","diff_lyn", "diff_runs", "rho", "r_f", "r_r", "standard"], 'w')
+    write_csv_w_a(filename6_2_1, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r", "standard"], 'w')
 
     filename6_2_2 = str(outdir) + "/min_lyn" + "_" + str(sigma) + ".csv" 
     write_csv_w_a(filename6_2_2, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r", "standard"], 'w')
 
-    filename7 = str(outdir) + "/stats_lyn" + "_" + str(sigma) + ".csv" 
-    write_csv_w_a(filename7, ["n","max","min","mean","std","equals0"], 'w')
+    filename7_2_1 = str(outdir) + "/max_d_lyn" + "_" + str(sigma) + ".csv" 
+    write_csv_w_a(filename7_2_1, ["n","s","diff_dlyn", "diff_runs", "rho", "dlyn_f", "dlyn_r", "standard"], 'w')
+
+    filename7_2_2 = str(outdir) + "/min_d_lyn" + "_" + str(sigma) + ".csv" 
+    write_csv_w_a(filename7_2_2, ["n","s","diff_dlyn", "diff_runs", "rho", "dlyn_f", "dlyn_r", "standard"], 'w')
+
+    filename8 = str(outdir) + "/stats_lyn" + "_" + str(sigma) + ".csv" 
+    write_csv_w_a(filename8, ["n","max","min","mean","std","equals0"], 'w')
+    
+    filename8_d = str(outdir) + "/stats_d_lyn" + "_" + str(sigma) + ".csv" 
+    write_csv_w_a(filename8_d, ["n","max","min","mean","std","equals0"], 'w')
 
     max_rho = 1
-    max_diff = 0
-    min_diff = 0
-    max_lyn = 0
-    min_lyn = 0
+    max_diff = -np.inf
+    min_diff = np.inf
+    max_lyn = -np.inf
+    min_lyn = np.inf
+    max_dlyn = -np.inf
+    min_dlyn = np.inf
     if k < 3:
         print("max_k must be >= 3")
         return
@@ -337,11 +395,16 @@ def allk_bbwt_bbwtrev(sigma, k, outdir,tempdir):
         write_csv_w_a(filename4_2, ["n","s","diff_runs", "rho", "r_f", "r_r", "standard"], 'w')
         
         filename6 = str(outdir) + "/max_lyn" + "_" + str(sigma) + "_" + str(i)+".csv" 
-        write_csv_w_a(filename6, ["n","s","diff_lyn", "diff_runs", "rho", "r_f", "r_r", "standard"], 'w')
+        write_csv_w_a(filename6, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r", "standard"], 'w')
         filename6_2 = str(outdir) + "/min_lyn" + "_" + str(sigma) + "_" + str(i)+".csv" 
         write_csv_w_a(filename6_2, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r", "standard"], 'w')
 
-        max_rho, max_diff, min_diff, max_lyn, min_lyn = bbwt_bbwtrev(sigma, i, filename, filename2, filename2_2, filename3, filename4, filename4_2, filename4_2_1, filename4_2_2, filename5, filename6, filename6_2, filename6_2_1, filename6_2_2, filename7, max_rho, max_diff, min_diff, max_lyn, min_lyn, tempdir)
+        filename7 = str(outdir) + "/max_d_lyn" + "_" + str(sigma) + "_" + str(i)+".csv" 
+        write_csv_w_a(filename7, ["n","s","diff_d_lyn", "diff_runs", "rho", "dlyn_f", "dlyn_r", "standard"], 'w')
+        filename7_2 = str(outdir) + "/min_d_lyn" + "_" + str(sigma) + "_" + str(i)+".csv" 
+        write_csv_w_a(filename7_2, ["n","s","diff_d_lyn", "diff_runs", "rho", "dlyn_f", "dlyn_r", "standard"], 'w')
+
+        max_rho, max_diff, min_diff, max_lyn, min_lyn, max_dlyn, min_dlyn, = bbwt_bbwtrev(sigma, i, filename, filename2, filename2_2, filename3, filename4, filename4_2, filename4_2_1, filename4_2_2, filename6, filename6_2, filename6_2_1, filename6_2_2, filename7, filename7_2, filename7_2_1, filename7_2_2, filename8, filename8_d, max_rho, max_diff, min_diff, max_lyn, min_lyn, max_dlyn, min_dlyn, tempdir)
     return
 
 if __name__ == '__main__':
