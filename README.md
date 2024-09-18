@@ -1,4 +1,4 @@
-# BBWT_paper
+# Study on runs of the BBWT
 
 This is the code for the paper **On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler
 Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Romana.
@@ -8,8 +8,8 @@ Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Roman
 This code investigates:
 - BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^{rev})}, \frac{r_B(s^{rev})}{r_B(s)})$
 * BBWT runs difference: $\delta_B(s) = r_B(s) - r_B(s^{rev})$
-+ Lyndon factors difference: $\ell(s)-\ell(^{rev})$
-- (TODO) add distinct Lyndon factors
++ Lyndon factors difference: $\ell(s)-\ell(s^{rev})$
+- Distinct Lyndon factors difference: $d(s)-d(s^{rev})$
 
 ### Install repo
 
@@ -49,20 +49,20 @@ options:
 ```
 
 The outputs will be found in a new directory. It consists of:
-- Statistics on the runs ratio for each string length up to mak_k (max $\rho_B$, avg $\rho_B$, std $\rho_B$, % strings with $\rho_B$=1)
-* Strings with max $\rho_B$ for each length
-+ Strings with max $\rho_B$ over all the string up to length max_k
-- Statistics on $\delta_B$ for each string length up to mak_k (max $\delta_B$, min $\delta_B$, avg $\delta_B$, std $\delta_B$, % strings with $\delta_B$=0)
-* Strings with max $\delta_B$ for each length
-+ Strings with max $\delta_B$ over all the string up to length max_k
-- Strings with min $\delta_B$ for each length
-* Strings with min $\delta_B$ over all the string up to length max_k
+- Statistics on the runs ratio for each string length up to mak_k (max $\rho_B(s)$, avg $\rho_B(s)$, std $\rho_B(s)$, % strings with $\rho_B(s)$=1)
+* Strings with max $\rho_B(s)$ for each length
++ Strings with max $\rho_B(s)$ over all the string up to length max_k
+- Statistics on $\delta_B(s)$ for each string length up to mak_k (max $\delta_B(s)$, min $\delta_B(s)$, avg $\delta_B(s)$, std $\delta_B(s)$, % strings with $\delta_B(s)$=0)
+* Strings with max $\delta_B(s)$ for each length
++ Strings with max $\delta_B(s)$ over all the string up to length max_k
+- Strings with min $\delta_B(s)$ for each length
+* Strings with min $\delta_B(s)$ over all the string up to length max_k
 
-- Statistics on $\ell(s)-\ell(^{rev})$ for each string length up to mak_k (max $\ell(s)-\ell(^{rev})$, min $\ell(s)-\ell(^{rev})$, avg $\ell(s)-\ell(^{rev})$, std $\ell(s)-\ell(^{rev})$)
-* Strings with max $\ell(s)-\ell(^{rev})$ for each length
-+ Strings with max $\ell(s)-\ell(^{rev})$ over all the string up to length max_k
-- Strings with min $\ell(s)-\ell(^{rev})$ for each length
-* Strings with min $\ell(s)-\ell(^{rev})$ over all the string up to length max_k
+- Statistics on $\ell(s)-\ell(^{rev})$ for each string length up to mak_k (max $\ell(s)-\ell(s^{rev})$, min $\ell(s)-\ell(^{rev})$, avg $\ell(s)-\ell(s^{rev})$, std $\ell(s)-\ell(s^{rev})$)
+* Strings with max $\ell(s)-\ell(s^{rev})$ for each length
++ Strings with max $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
+- Strings with min $\ell(s)-\ell(s^{rev})$ for each length
+* Strings with min $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 * (TODO add distinc Lyndon factors)
 + (TODO make thic coherent with real results)
 
