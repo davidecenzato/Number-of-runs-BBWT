@@ -47,8 +47,14 @@ options:
   -o OUTDIR, --outdir OUTDIR
                         existing output directory for generated files
 ```
+Example:
+``` console
+python BBWT_tests.py 2 6 -o outdir/
+```
+This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containing the output files for binary strings of length from 3 to 6. 
 
-The outputs will be found in a new directory. It consists of:
+
+The output of the code will be found in a new directory. It consists of:
 - Statistics on the runs ratio for each string length up to mak_k (max, min, avg, std, % strings with $\rho_B(s)=1$)
 * Strings with max $\rho_B(s)$ for each length
 + Strings with max $\rho_B(s)$ over all the string up to length max_k
@@ -70,10 +76,4 @@ The outputs will be found in a new directory. It consists of:
 - Strings with min $d(s)-d(s^{rev})$ for each length
 * Strings with min $d(s)-d(s^{rev})$ over all the string up to length max_k
 
-+ (TODO make this coherent with real results)
 
-Example:
-``` console
-python BBWT_tests.py 2 6 -o outdir/
-```
-This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containing the output files for binary strings of length from 3 to 6. 
