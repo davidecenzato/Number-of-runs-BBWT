@@ -6,8 +6,8 @@ Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Roman
 (TODO) brief intro
 
 This code investigates:
-- BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^\rev)}, \frac{r_B(s^\rev)}{r_B(s)})$
-* BBWT runs difference: $\delta_B(s) = r_B(s) - r_B(s^\rev)$
+- BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^rev)}, \frac{r_B(s^rev)}{r_B(s)})$
+* BBWT runs difference: $\delta_B(s) = r_B(s) - r_B(s^rev)$
 + Lyndon factors difference: $\ell(s)-\ell(^{rev})$
 - (TODO) add distinct Lyndon factors
 
