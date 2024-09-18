@@ -6,9 +6,10 @@ Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Roman
 (TODO) brief intro
 
 This code investigates:
-- $\rho_B$: (TODO) runs ratio, formula here
-* $\delta_B$: (TODO) difference in the number of runs of the BBWT formula here
-+ $\mathcal{L}$ /# Lyndon factors (TODO fix) $\mathcal{l}(s)-\mathcal{l}(s^{rev})$
+- BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^\rev)}, \frac{r_B(s^\rev)}{r_B(s)})$
+* BBWT runs difference: $\delta_B(s) = r_B(s) - r_B(s^\rev)$
++ Lyndon factors difference: $\ell(s)-\ell(^{rev})$
+- (TODO) add distinct Lyndon factors
 
 ### Install repo
 
@@ -57,11 +58,11 @@ The outputs will be found in a new directory. It consists of:
 - Strings with min $\delta_B$ for each length
 * Strings with min $\delta_B$ over all the string up to length max_k
 
-- Statistics on $\mathcal{L}$ for each string length up to mak_k (max $\mathcal{L}$, min $\mathcal{L}$, avg $\mathcal{L}$, std $\mathcal{L}$)
-* Strings with max $\mathcal{L}$ for each length
-+ Strings with max $\mathcal{L}$ over all the string up to length max_k
-- Strings with min $\mathcal{L}$ for each length
-* Strings with min $\mathcal{L}$ over all the string up to length max_k
+- Statistics on $\ell(s)-\ell(^{rev})$ for each string length up to mak_k (max $\ell(s)-\ell(^{rev})$, min $\ell(s)-\ell(^{rev})$, avg $\ell(s)-\ell(^{rev})$, std $\ell(s)-\ell(^{rev})$)
+* Strings with max $\ell(s)-\ell(^{rev})$ for each length
++ Strings with max $\ell(s)-\ell(^{rev})$ over all the string up to length max_k
+- Strings with min $\ell(s)-\ell(^{rev})$ for each length
+* Strings with min $\ell(s)-\ell(^{rev})$ over all the string up to length max_k
 * (TODO add distinc Lyndon factors)
 + (TODO make thic coherent with real results)
 
