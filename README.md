@@ -76,4 +76,4 @@ Example:
 ``` console
 python BBWT_tests.py 2 6 -o outdir/
 ```
-This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containing the output files for binary strings of lenght from 3 to 6. 
+This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containing the output files for binary strings of length from 3 to 6. 
