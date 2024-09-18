@@ -58,13 +58,13 @@ The outputs will be found in a new directory. It consists of:
 - Strings with min $\delta_B(s)$ for each length
 * Strings with min $\delta_B(s)$ over all the string up to length max_k
 
-- Statistics on $\ell(s)-\ell(s^{rev})$ for each string length up to mak_k (max, min, avg, std, $\ell(s)-\ell(s^{rev})=0$)
+- Statistics on $\ell(s)-\ell(s^{rev})$ for each string length up to mak_k (max, min, avg, std, % strings with $\ell(s)-\ell(s^{rev})=0$)
 * Strings with max $\ell(s)-\ell(s^{rev})$ for each length
 + Strings with max $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 - Strings with min $\ell(s)-\ell(s^{rev})$ for each length
 * Strings with min $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 
-- Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std, $d(s)-d(^{rev})=0$)
+- Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std, % strings with $d(s)-d(^{rev})=0$)
 * Strings with max $d(s)-d(s^{rev})$ for each length
 + Strings with max $d(s)-d(s^{rev})$ over all the string up to length max_k
 - Strings with min $d(s)-d(s^{rev})$ for each length
