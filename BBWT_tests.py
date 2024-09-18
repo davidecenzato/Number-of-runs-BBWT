@@ -18,15 +18,16 @@ def main():
                         default=cwd.joinpath("outdir"), type=Path)
     args = parser.parse_args()
     sigma = args.sigma
+    max_k = args.max_k
     outdir = Path(args.outdir).joinpath("sigma_" + str(sigma) + "_" + str(args.max_k) )
     if not Path(outdir).exists():
         outdir.mkdir()
         print("A new output directory has been created.")
-    tempdir = Path("temp")
+    tempdir = Path("temp"+str(sigma)+"_"+str(max_k))
     if not Path(tempdir).exists():
         tempdir.mkdir()
         print("A new temporary directory has been created.")
-    allk_bbwt_bbwtrev(sigma, args.max_k, outdir)
+    allk_bbwt_bbwtrev(sigma, max_k, outdir, tempdir)
     shutil.rmtree(tempdir)
     exit()
 
@@ -65,7 +66,7 @@ def check_rev(seq):
         return True
     return False
 
-def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, outfile4_2, outfile4_2_1, outfile4_2_2, outfile5, outfile6, outfile6_2, outfile6_2_1, outfile6_2_2, outfile7, max_rho, max_diff, min_diff, max_lyn, min_lyn):
+def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, outfile4_2, outfile4_2_1, outfile4_2_2, outfile5, outfile6, outfile6_2, outfile6_2_1, outfile6_2_2, outfile7, max_rho, max_diff, min_diff, max_lyn, min_lyn, tempdir):
     rho_list = []
     no_rho_1 = 0
     max_rho_l = 1
@@ -85,9 +86,9 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
         seq = ''.join(s)
         if check_rev(seq):
             # write forward to file
-            f_file = "temp/forward_"+str(k)+".txt"
-            r_file = "temp/reverse_"+str(k)+".txt"
-            lr_file = "temp/lyn_reverse_"+str(k)+".txt"
+            f_file = str(tempdir)+"/forward_"+str(k)+".txt"
+            r_file = str(tempdir)+"/reverse_"+str(k)+".txt"
+            lr_file = str(tempdir)+"/lyn_reverse_"+str(k)+".txt"
             with open(f_file,"w") as file:
                 file.write(seq)
             # compute bbwt forward
@@ -282,7 +283,7 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, outfile2_2, outfile3, outfile4, out
     write_csv_w_a(outfile7, [str(k),str(max_lyn_l),str(min_lyn_l),str(mean_lyn_l),str(std_lyn_l),str(p_lyn_0_l)],'a')
     return max_rho, max_diff, min_diff, max_lyn, min_lyn
 
-def allk_bbwt_bbwtrev(sigma, k, outdir, count_rho=False, brho=False, bdiff=False, cfactors=False):
+def allk_bbwt_bbwtrev(sigma, k, outdir,tempdir):
     b_rho, b_diff, c_f = {}, {}, {}
     # open output files and write headings
     filename = str(outdir) + "/stats_rho" + "_" + str(sigma) + ".csv" 
@@ -340,7 +341,7 @@ def allk_bbwt_bbwtrev(sigma, k, outdir, count_rho=False, brho=False, bdiff=False
         filename6_2 = str(outdir) + "/min_lyn" + "_" + str(sigma) + "_" + str(i)+".csv" 
         write_csv_w_a(filename6_2, ["n","s","diff_lyn", "diff_runs", "rho", "lyn_f", "lyn_r", "standard"], 'w')
 
-        max_rho, max_diff, min_diff, max_lyn, min_lyn = bbwt_bbwtrev(sigma, i, filename, filename2, filename2_2, filename3, filename4, filename4_2, filename4_2_1, filename4_2_2, filename5, filename6, filename6_2, filename6_2_1, filename6_2_2, filename7, max_rho, max_diff, min_diff, max_lyn, min_lyn)
+        max_rho, max_diff, min_diff, max_lyn, min_lyn = bbwt_bbwtrev(sigma, i, filename, filename2, filename2_2, filename3, filename4, filename4_2, filename4_2_1, filename4_2_2, filename5, filename6, filename6_2, filename6_2_1, filename6_2_2, filename7, max_rho, max_diff, min_diff, max_lyn, min_lyn, tempdir)
     return
 
 if __name__ == '__main__':
