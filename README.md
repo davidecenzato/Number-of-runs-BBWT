@@ -49,22 +49,28 @@ options:
 ```
 
 The outputs will be found in a new directory. It consists of:
-- Statistics on the runs ratio for each string length up to mak_k (max $\rho_B(s)$, avg $\rho_B(s)$, std $\rho_B(s)$, % strings with $\rho_B(s)$=1)
+- Statistics on the runs ratio for each string length up to mak_k (max, min, avg, std, % strings with $\rho_B(s)$=1)
 * Strings with max $\rho_B(s)$ for each length
 + Strings with max $\rho_B(s)$ over all the string up to length max_k
-- Statistics on $\delta_B(s)$ for each string length up to mak_k (max $\delta_B(s)$, min $\delta_B(s)$, avg $\delta_B(s)$, std $\delta_B(s)$, % strings with $\delta_B(s)$=0)
+- Statistics on $\delta_B(s)$ for each string length up to mak_k (max, min, avg, std, % strings with $\delta_B(s)$=0)
 * Strings with max $\delta_B(s)$ for each length
 + Strings with max $\delta_B(s)$ over all the string up to length max_k
 - Strings with min $\delta_B(s)$ for each length
 * Strings with min $\delta_B(s)$ over all the string up to length max_k
 
-- Statistics on $\ell(s)-\ell(^{rev})$ for each string length up to mak_k (max $\ell(s)-\ell(s^{rev})$, min $\ell(s)-\ell(^{rev})$, avg $\ell(s)-\ell(s^{rev})$, std $\ell(s)-\ell(s^{rev})$)
+- Statistics on $\ell(s)-\ell(^{rev})$ for each string length up to mak_k (max, min, avg, std)
 * Strings with max $\ell(s)-\ell(s^{rev})$ for each length
 + Strings with max $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 - Strings with min $\ell(s)-\ell(s^{rev})$ for each length
 * Strings with min $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
-* (TODO add distinc Lyndon factors)
-+ (TODO make thic coherent with real results)
+
+- Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std)
+* Strings with max $d(s)-d(s^{rev})$ for each length
++ Strings with max $d(s)-d(s^{rev})$ over all the string up to length max_k
+- Strings with min $d(s)-d(s^{rev})$ for each length
+* Strings with min $d(s)-d(s^{rev})$ over all the string up to length max_k
+
++ (TODO make this coherent with real results)
 
 Example:
 ``` console
