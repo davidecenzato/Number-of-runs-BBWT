@@ -12,7 +12,7 @@ Here, we study the relationship between the number of runs of the BBWT of a text
 ### Download and Compile
 
 ```console
-git clone https://github.com/davidecenzato/BBWT_paper.git
+git clone https://github.com/davidecenzato/Number-of-runs-BBWT.git
 git submodule update --init --recursive
 
 python compile.py
