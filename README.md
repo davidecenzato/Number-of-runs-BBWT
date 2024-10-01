@@ -48,22 +48,22 @@ This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containin
 
 
 The output of the code will be found in a new directory. It consists of:
-- Statistics on the runs ratio for each string length up to mak_k (max, min, avg, std, % strings with $\rho_B(s)=1$)
+- Statistics on the runs ratio for each string length up to mak_k (max, min, avg, std, % of strings with $\rho_B(s)=1$)
 * Strings with max $\rho_B(s)$ for each length
 + Strings with max $\rho_B(s)$ over all the string up to length max_k
-- Statistics on $\delta_B(s)$ for each string length up to mak_k (max, min, avg, std, % strings with $\delta_B(s)=0$)
+- Statistics on $\delta_B(s)$ for each string length up to mak_k (max, min, avg, std, % of strings with $\delta_B(s)=0$)
 * Strings with max $\delta_B(s)$ for each length
 + Strings with max $\delta_B(s)$ over all the string up to length max_k
 - Strings with min $\delta_B(s)$ for each length
 * Strings with min $\delta_B(s)$ over all the string up to length max_k
 
-- Statistics on $\ell(s)-\ell(s^{rev})$ for each string length up to mak_k (max, min, avg, std, % strings with $\ell(s)-\ell(s^{rev})=0$)
+- Statistics on $\ell(s)-\ell(s^{rev})$ for each string length up to mak_k (max, min, avg, std, % of strings with $\ell(s)-\ell(s^{rev})=0$)
 * Strings with max $\ell(s)-\ell(s^{rev})$ for each length
 + Strings with max $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 - Strings with min $\ell(s)-\ell(s^{rev})$ for each length
 * Strings with min $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
 
-- Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std, % strings with $d(s)-d(^{rev})=0$)
+- Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std, % of strings with $d(s)-d(s^{rev})=0$)
 * Strings with max $d(s)-d(s^{rev})$ for each length
 + Strings with max $d(s)-d(s^{rev})$ over all the string up to length max_k
 - Strings with min $d(s)-d(s^{rev})$ for each length
