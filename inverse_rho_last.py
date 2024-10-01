@@ -123,51 +123,6 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, count_rho=False, brho=False, bdiff=
             command = "{exe} -b {input}".format(exe = str(cwd)+"/cais/cais", input= "forward.txt")
             subprocess.check_call(command.split())
             nrf = noRuns("forward.txt.bwt")
-            '''
-            bwt_for = BWT(seq)
-            nrf = la.count_run(bwt_for)
-            bwt_rev = BWT(rev)
-            nrr = la.count_run(bwt_rev)
-            '''
-            '''
-            dif = rf - rr
-            cf_r = len(Lfact)
-            cf_d = cf_f - cf_r
-            rep = round(k/rf, 2)
-            d.append([rf,
-                      rr,
-                      r,
-                      dif,
-                      cf_f,
-                      lf_r,
-                      cf_r,
-                      cf_d,
-                      rep
-                      # cf_r := round(len(Duval(s))/len(Duval(rev)), 2),
-                      ])
-            print(seq)
-            rf = la.count_run(la.bbwt(seq, False, False))
-            print(rf)
-            rev = seq[::-1]
-            rr = la.count_run(la.bbwt(rev, False, False))
-            r = round(max((rf / rr), (rr / rf)), 2)
-            '''
-            '''
-            if r >= brho:
-                
-                cf_f = len(Duval(s))
-                lf_r = Duval(rev)
-                dif = rf - rr
-                cf_d = cf_f - len(lf_r)
-                
-                rho[seq] = [k,r,
-                      dif,
-                      rf, rr, #la.count_run(la.bwt(seq, False, False))==2,
-                      cf_d,
-                      cf_f, cf_r, lf_r]
-                
-                rho[seq] = r
-            '''
 
             # write single sequence stats
             write_csv_w_a(outfile2, [str(k),seq,str(r)], 'a')
@@ -181,50 +136,8 @@ def bbwt_bbwtrev(sigma,k, outfile, outfile2, count_rho=False, brho=False, bdiff=
     # write stats for all sequences of length k
     write_csv_w_a(outfile, [str(k),str(max_rho),str(min_rho),str(mean_rho),str(std_rho),str(no_rho_1)],'a')
 
-                #if not count_rho: rho={k:v for k,v in heapq.nlargest(15, rho.items(), key=lambda i: i[1])}
-            # if count_rho:
-            #     rho[seq] = r
-            # if bdiff:
-            #     if dif >= bdiff or dif <= -(bdiff):
-            #         diff[seq] = [dif, cf_d]
-            #         #diff_max = {k: v for k, v in heapq.nlargest(bdiff, diff.items(), key=lambda i: i[1])}
-                    #diff = {k: v for k, v in heapq.nsmallest(bdiff, diff.items(), key=lambda i: i[1])}
-                    #diff.update(diff_max)
-            # if True:
-            #     repseq[seq]=rep
-            #     repseq = {k: v for k, v in heapq.nlargest(10, repseq.items(), key=lambda i: i[1])}
-            # if cfactors: cf[seq]=cf_d
-    #print('k = ', k, " \par", sorted(Counter([s[3] for s in d]).items()))
-    #if count_rho: print('k=',k, sorted(Counter([s[2] for s in d]).items()))
-    #if cfactors: print('k = ', k, " \par", sorted(Counter([s[4] for s in d]).items()))
-    #filename = str(outdir) + "/allruns" + str(k) + "_" + str(sigma) + ".csv"
-    #write_csv(filename, d)
     return rho, diff, cf
-'''
-def min_max_diff(sigma,k, bdiff, b_diff, outdir):
-    max_diff = sorted(b_diff.items(), key=lambda i: i[1], reverse=True)
-    #max_diff = heapq.nlargest(bdiff, b_diff.items(), key=lambda i: i[1])
-    filename = str(outdir) + "/maxMindf" + str(k) + "_" + str(sigma) + ".csv"
-    #filename = str(outdir) + "/maxdiff_" + str(sigma) + ".csv"
-    write_csv(filename, max_diff)
-    #min_diff = sorted(b_diff.items(), key=lambda i: i[1], reverse=False)
-    #min_diff = heapq.nsmallest(bdiff, b_diff.items(), key=lambda i: i[1])
-    #filename = str(outdir) + "/mindf_" + str(sigma) + ".csv"
-    #filename = str(outdir) + "/mindiff_" + str(sigma) + ".csv"
-    #write_csv(filename, min_diff)
-    return
 
-def write_csv2(sigma, dict , fname, outdir):
-    filename = str(outdir) + "/" + fname + str(sigma) + ".csv"
-    write_csv(filename, dict)
-    return
-
-def big_rho(sigma,k, b_rho, outdir):
-    max_rho = sorted(b_rho.items(), key=lambda i: i[1], reverse=True)
-    filename = str(outdir) + "/maxrho" + str(k) + "_" + str(sigma) + ".csv"
-    write_csv(filename, max_rho)
-    return
-'''
 def allk_bbwt_bbwtrev(sigma, k, outdir, count_rho=False, brho=False, bdiff=False, cfactors=False):
     b_rho, b_diff, c_f = {}, {}, {}
     # open output files and write headings

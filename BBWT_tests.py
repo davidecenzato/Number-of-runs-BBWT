@@ -384,7 +384,7 @@ def allk_bbwt_bbwtrev(sigma, k, outdir,tempdir):
         print("max_k must be >= 3")
         return
     for i in range(3, k+1):
-        print(i)
+        print("processing k:",i)
         # max RHO of each string length
         filename2 = str(outdir) + "/max_rho" + "_" + str(sigma)+"_" + str(i)+ ".csv" 
         write_csv_w_a(filename2, ["n","s","rho", "diff", "r_f", "r_r", "standard", "Lyn_r"], 'w')

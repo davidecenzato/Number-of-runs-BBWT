@@ -1,40 +1,33 @@
-# Study on runs of the BBWT
+# Study on the number of runs of the BBWT
 
-This is the code for the paper **On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler
+This is the code to replicate the experiments in the paper **On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler
 Transform** by Elena Biagi, Davide Cenzato, Zsuzsanna Lipták and Giuseppe Romana.
 
-(TODO) brief intro, ex $r_B$
-
-This code investigates:
+Here, we study the relationship between the number of runs of the BBWT of a text $r_B(s)$ and it's reverse $r_B(s^{rev})$ by computing different parameters, including:
 - BBWT runs ratio: $\rho_B(s) = \max(\frac{r_B(s)}{r_B(s^{rev})}, \frac{r_B(s^{rev})}{r_B(s)})$
 * BBWT runs difference: $\delta_B(s) = r_B(s) - r_B(s^{rev})$
 + Lyndon factors difference: $\ell(s)-\ell(s^{rev})$
 - Distinct Lyndon factors difference: $d(s)-d(s^{rev})$
 
-### Install repo
+### Download and Compile
 
 ```console
 git clone https://github.com/davidecenzato/BBWT_paper.git
 git submodule update --init --recursive
 
-cd cais
-
-cd external/sdsl-lite
-mkdir installed
-./install.sh installed/
-
-cd ../../
-cp ../main.cpp ./
-cp ../Makefile ./
-make 
-
-cd ..
-mkdir outdir
+python compile.py
 ```
 
+### Requirements
+
+This software requires:
+* A modern 64-bit Mac OS or Linux operating system.
+* A modern Python 3 release version 3.7 or higher.
+* A modern C++11 compiler such as `g++` version 4.9 or higher.
+
 ### Running experiments
-The code takes in input the size of the alphabet ($\sigma$) and the maximumg length of the strings we are interested in (max_k).
-It also creates a temporaty directory that will then be deleted automatically.
+The code takes in input the size of the alphabet ($\sigma$) and the maximum length of the strings we are interested in (max_k).
+It also creates a temporary directory that will then be deleted automatically.
 ```
 usage: BBWT_tests.py [-h] [-o OUTDIR] sigma max_k
 
@@ -76,4 +69,23 @@ The output of the code will be found in a new directory. It consists of:
 - Strings with min $d(s)-d(s^{rev})$ for each length
 * Strings with min $d(s)-d(s^{rev})$ over all the string up to length max_k
 
+### References and citations
 
+[1] Elena Biagi, Davide Cenzato, Zsuzsanna Lipták, Giuseppe Romana: On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler Transform. ICTCS 2023: 129-142 ([go to the paper](https://ceur-ws.org/Vol-3587/4564.pdf))
+
+Please, if you use this work in an academic setting cite the following papers:
+
+#### conference version
+    @inproceedings{BiagiCLR23,
+      author       = {Elena Biagi and
+                      Davide Cenzato and
+                      Zsuzsanna Lipt{\'{a}}k and
+                      Giuseppe Romana},
+      title        = {On the Number of Equal-Letter Runs of the Bijective {Burrows-Wheeler}
+                      Transform},
+      booktitle    = {Proceedings of the 24th Italian Conference on Theoretical Computer
+                      Science, Palermo, Italy, September 13-15, 2023},
+      volume       = {3587},
+      pages        = {129--142},
+      year         = {2023}
+    }
