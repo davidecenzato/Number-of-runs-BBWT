@@ -13,9 +13,9 @@ cwd = Path(__file__).parent.absolute()
 
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument("sigma", help="size of the alphabet", default=2, type=int)
-    parser.add_argument("max_k", help="maximum strings length", default=10, type=int)
-    parser.add_argument("-o", "--outdir", help="existing output directory for generated files",
+    parser.add_argument("sigma", help="Size of the alphabet", default=2, type=int)
+    parser.add_argument("max_k", help="Maximum string length", default=10, type=int)
+    parser.add_argument("-o", "--outdir", help="Existing output directory for generated files",
                         default=cwd.joinpath("outdir"), type=Path)
     args = parser.parse_args()
     sigma = args.sigma

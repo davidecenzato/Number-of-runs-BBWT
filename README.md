@@ -26,19 +26,19 @@ This software requires:
 * A modern C++11 compiler such as `g++` version 4.9 or higher.
 
 ### Running experiments
-The code takes in input the size of the alphabet ($\sigma$) and the maximum length of the strings we are interested in (max_k).
+The code takes in input the size of the alphabet ($\sigma$) and the maximum length of the strings we are interested in ($max_k$).
 It also creates a temporary directory that will then be deleted automatically.
 ```
 usage: BBWT_tests.py [-h] [-o OUTDIR] sigma max_k
 
 positional arguments:
-  sigma                 size of the alphabet
-  max_k                 maximum strings length
+  sigma                 Size of the alphabet
+  max_k                 Maximum string length
 
 options:
-  -h, --help            show this help message and exit
+  -h, --help            Show this help message and exit
   -o OUTDIR, --outdir OUTDIR
-                        existing output directory for generated files
+                        Existing output directory for generated files
 ```
 Example:
 ``` console
@@ -50,24 +50,24 @@ This will create a subdirectory inside outdir ``` outdir/sigma_2_6 ``` containin
 The output of the code will be found in a new directory. It consists of:
 - Statistics on the runs ratio for each string length up to mak_k (max, min, avg, std, % of strings with $\rho_B(s)=1$)
 * Strings with max $\rho_B(s)$ for each length
-+ Strings with max $\rho_B(s)$ over all the string up to length max_k
++ Strings with max $\rho_B(s)$ over all the strings up to length $max_k$
 - Statistics on $\delta_B(s)$ for each string length up to mak_k (max, min, avg, std, % of strings with $\delta_B(s)=0$)
 * Strings with max $\delta_B(s)$ for each length
-+ Strings with max $\delta_B(s)$ over all the string up to length max_k
++ Strings with max $\delta_B(s)$ over all the strings up to length $max_k$
 - Strings with min $\delta_B(s)$ for each length
-* Strings with min $\delta_B(s)$ over all the string up to length max_k
+* Strings with min $\delta_B(s)$ over all the strings up to length $max_k$
 
 - Statistics on $\ell(s)-\ell(s^{rev})$ for each string length up to mak_k (max, min, avg, std, % of strings with $\ell(s)-\ell(s^{rev})=0$)
 * Strings with max $\ell(s)-\ell(s^{rev})$ for each length
-+ Strings with max $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
++ Strings with max $\ell(s)-\ell(s^{rev})$ over all the strings up to length $max_k$
 - Strings with min $\ell(s)-\ell(s^{rev})$ for each length
-* Strings with min $\ell(s)-\ell(s^{rev})$ over all the string up to length max_k
+* Strings with min $\ell(s)-\ell(s^{rev})$ over all the strings up to length $max_k$
 
 - Statistics on $d(s)-d(^{rev})$ for each string length up to mak_k (max, min, avg, std, % of strings with $d(s)-d(s^{rev})=0$)
 * Strings with max $d(s)-d(s^{rev})$ for each length
-+ Strings with max $d(s)-d(s^{rev})$ over all the string up to length max_k
++ Strings with max $d(s)-d(s^{rev})$ over all the strings up to length $max_k$
 - Strings with min $d(s)-d(s^{rev})$ for each length
-* Strings with min $d(s)-d(s^{rev})$ over all the string up to length max_k
+* Strings with min $d(s)-d(s^{rev})$ over all the strings up to length $max_k$
 
 ### References and citations
 
