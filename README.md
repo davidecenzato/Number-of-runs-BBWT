@@ -73,13 +73,13 @@ The output files consist of:
 
 [1] Elena Biagi, Davide Cenzato, Zsuzsanna Lipták, Giuseppe Romana: On the Number of Equal-Letter Runs of the Bijective Burrows-Wheeler Transform. ICTCS 2023: 129-142 ([go to the paper](https://ceur-ws.org/Vol-3587/4564.pdf))
 
-Please, if you use this work in an academic setting cite the following papers:
+If you use this work, please cite the following papers:
 
 #### conference version
     @inproceedings{BiagiCLR23,
       author       = {Elena Biagi and
                       Davide Cenzato and
-                      Zsuzsanna Lipt{\'{a}}k and
+                      {\relax Zs}uzsanna Lipt{\'{a}}k and
                       Giuseppe Romana},
       title        = {On the Number of Equal-Letter Runs of the Bijective {Burrows-Wheeler}
                       Transform},
